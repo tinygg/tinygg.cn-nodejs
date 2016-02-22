@@ -40,5 +40,7 @@ ngix http://nginx.org/download/nginx-1.8.1.zip
 	nginx -s stop
 
 ##运行
+
 forever start blog.js
+
 forever stop blog.js
