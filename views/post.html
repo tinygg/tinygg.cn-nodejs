@@ -1,0 +1,54 @@
+{% extends 'frame.html' %}
+
+{% block title %}文章 - {% endblock %}
+
+{% block content %}
+<div id="content">
+
+    <div class="post post-text clearfix">
+        <div class="post-meta">
+            <a class="post-date" href="{{post.url}}">
+                <span class="post-date-month">{{ post.date.month}}</span>
+                <span class="post-date-day">{{ post.date.day }}</span>
+                <span class="post-date-year">{{ post.date.year }} </span>
+            </a>
+        </div>
+
+        <div class="post-body">
+            <div class="post-content">
+                <h2 class="post-title">
+                    <a href="{{post.url}}">{{ post.title|title }}</a>
+                </h2>
+                <div class="rich-content">
+                    {{ post.content|safe }}
+                </div>
+            </div>
+            <div class="post-extra clearfix">
+                <div class="post-link-wrap">
+                    <a class="post-plink" href="{{post.url}}">23 热度</a>
+                    <span class="pipe">|</span>
+                    <a class="post-plink" href="{{post.url}}">全文链接</a>
+                </div>
+            </div>
+            <div class="post-note">
+                <!--<iframe id="diandian_comments" scrolling="no" allowtransparency="true" src="/comment.html" frameborder="0" height="148" width="700">
+
+                </iframe>-->
+            </div>
+        </div>
+    </div>
+    <div id="pagination" class="normal-pagination">
+        {% if post.last_url != '/' %}
+                <a href="{{post.last_url}}" id="pager-prev" alt="{{post.last_title}}">上一篇</a>
+        {% else %}
+                <a href="{{post.last_url}}" id="pager-prev" alt="{{post.last_title}}">首页</a>
+        {% endif %}
+
+        {% if post.next_url != '/' %}
+                <a href="{{post.next_url}}" id="pager-next" alt="{{post.last_title}}">下一篇</a>
+        {% else %}
+                <a href="{{post.next_url}}" id="pager-next" alt="{{post.next_title}}">首页</a>
+        {% endif %}
+
+    </div>
+</div>{% endblock %}

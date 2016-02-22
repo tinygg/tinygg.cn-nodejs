@@ -1,0 +1,58 @@
+{% extends 'frame.html' %}
+
+{% block title %}首页 - {% endblock %}
+
+{% block content %}
+    <div id="content">
+
+    {% for post in posts %}
+        <div class="post post-text clearfix">
+            <div class="post-meta">
+                <a class="post-date" href="{{ post.url }}">
+                    <span class="post-date-month">{{ post.date.month }}</span>
+                    <span class="post-date-day">{{ post.date.day }}</span>
+                    <span class="post-date-year">{{ post.date.year }}</span>
+                </a>
+            </div>
+
+            <div class="post-body">
+                <div class="post-content">
+                    <h2 class="post-title">
+                        <a href="{{ post.url }}">{{ post.title }}</a>
+                    </h2>
+                    <div class="rich-content">
+                        <div class="text-summary">
+                            {{ post.content|safe }}
+                        </div>
+                        <div class="text-more">
+                            <a href="{{ post.url }}">继续阅读»</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-extra clearfix">
+                    <div class="post-link-wrap">
+<!--                         <a class="post-plink" href="">0 热度</a>
+                        <span class="pipe">|</span> -->
+                        <a class="post-plink" href="{{ post.url }}">全文链接</a>
+                    </div>
+<!--                     <div class="post-tag">
+                        <a href="post.url">#</a>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        
+        {% endfor %}
+
+        <div id="pagination" class="normal-pagination">
+            {% if last_page_url %}
+                <a href="{{ last_page_url }}" id="pager-prev">上一页</a>
+            {% endif %}
+
+            {% if next_page_url %}
+                <a href="{{ next_page_url }}" id="pager-next">下一页</a>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}

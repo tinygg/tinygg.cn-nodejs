@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>{% block title %}Title{% endblock %}四道风’s 博客'</title>
+    <meta name="description" content="我是四道风.">
+    <script src="" async="" type="text/javascript"></script>
+    <link rel="shortcut icon" type="image/jpeg" href="/image/TINY_16.PNG">
+    <link rel="stylesheet" type="text/css" href="/css/default.css">
+    <style>
+        body {
+            background-image: url(/image/bg.png);
+        }
+
+        #wrap {
+            background-image: url(/image/top_left.png);
+            background-position: left top;
+        }
+
+        a {
+            color: #E53843;
+        }
+
+            a:hover {
+                color: #363D3F;
+            }
+
+        .post-body, .post-date, .nav-item, #pagination a {
+            background-color: #FFF;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="header-wrap">
+            <div id="header" class="clearfix">
+                <div id="nav">
+                    <a href="/archive" id="nav-archive" class="nav-item">存档</a>
+                    <a href="/inbox" id="nav-inbox" class="nav-item">私信</a>
+                    <div id="nav-search-wrap">
+                        <span id="nav-search" class="nav-item">搜索</span>
+                        <form id="nav-search-form">
+                            <input id="nav-search-input" style="display:none" type="text">
+                        </form>
+                    </div>
+                </div>
+                <div id="blog-info">
+                    <h1 id="blog-name">
+                        <a href="/">四道风’s 博客</a>
+                    </h1>
+                    <div id="blog-desc">我是四道风.</div>
+                </div>
+            </div>
+        </div>
+
+        {% block content %}
+        Content
+        {% endblock%}
+
+        <div id="footer">
+            <div class="copyright"><a href="/">四道风’s 博客</a> © ALL RIGHT RESERVED.</div>
+        </div>
+    </div>
+
+</body>
+</html>
