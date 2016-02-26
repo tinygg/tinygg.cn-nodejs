@@ -146,7 +146,7 @@ function *post(){
     }
   }; 
 
-  post_json['permanent_url'] = this.request.header.host + '/' + stamp;
+  post_json['permanent_url'] = 'http://tinygg.cn/' + stamp;
   post_json['permanent_id'] = stamp;
   //console.log(post_json);
   this.body = yield render('post', post_json);
@@ -164,7 +164,7 @@ function *index() {
 
   var posts_json = get_posts_json(page, per_page);
   //console.log(this.request.header);//////////////////////
-  posts_json['permanent_url'] = this.request.header.host;
+  posts_json['permanent_url'] = 'http://tinygg.cn';
   this.body = yield render('index', posts_json);
 }
 
