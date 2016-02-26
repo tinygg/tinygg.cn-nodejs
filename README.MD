@@ -1,21 +1,38 @@
-##Web框架 Koa.js
+## Web Framwork:Koajs
+[Koa.js](http://koajs.com/)
+![koajs](koajs.png)
 
-##Template Swig 
 
-##NO DATABASE
+## Template:Swig
+[Swig Template](https://github.com/paularmstrong/swig/)
 
-##cache.js
+## Database:No
 
-手写的缓存插件
+## Cache:cache.js
+纯手写的缓存模块
 
-##Markdown
-直接发布在archive目录即可.
+## 发布文章
+Markdown文章直接发布在archive目录即可.
+命名规范：0123456789123(时间戳，长度13)#YYYY-MM-DD(时间)#xxxxxxxxxx-_xxxxx.MD(英文标题:英文、数字、-、_不支持中文命名)
 
-##部署
-windows下载
-ngix http://nginx.org/download/nginx-1.8.1.zip
+## 部署
 
-追加配置项
+### NODE依赖项
+	npm install koa
+	npm install koa-route
+	npm install koa-static
+	npm install koa-logger
+	npm install swig
+	npm install co-body
+	npm install co-views
+	npm install glob
+	npm install gaze
+	npm install showdown
+
+### 反向代理配置(Nginx)
+
+下载[nginx windows](http://nginx.org/download/nginx-1.8.1.zip)
+追加配置项:
 
 	server {
 			listen       80;

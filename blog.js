@@ -146,6 +146,8 @@ function *post(){
     }
   }; 
 
+  post_json['permanent_url'] = this.request.header.host + '/' + stamp;
+  post_json['permanent_id'] = stamp;
   //console.log(post_json);
   this.body = yield render('post', post_json);
 }
@@ -160,8 +162,10 @@ function *index() {
     page = +paths[1];
   }
 
-  var posts = get_posts_json(page, per_page);
-  this.body = yield render('index', posts);
+  var posts_json = get_posts_json(page, per_page);
+  //console.log(this.request.header);//////////////////////
+  posts_json['permanent_url'] = this.request.header.host;
+  this.body = yield render('index', posts_json);
 }
 
 function get_posts_json(page, per_page)
