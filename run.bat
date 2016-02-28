@@ -1,0 +1,1 @@
+forever start blog.js
