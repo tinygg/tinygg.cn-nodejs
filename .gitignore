@@ -1,2 +1,4 @@
 node_modules/*
-archive/*.mg
+archive/*.MD
+*.dump
+!*#IT-IS-A-TEST.MD

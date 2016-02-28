@@ -34,11 +34,38 @@ app.use(logger());
 // route definitions
 app.use(route.get('/([0-9]*)', index));
 // format:YYYY-MM-DD/title
-app.use(route.get('/([0-9]{4}-[0-9]{2}-[0-9]{2})/([0-9\-_A-Za-z]*)', post));
+app.use(route.get('/([0-9]{4}-[0-9]{2}-[0-9]{2})/(.*)', post));
 // format:post.id
 app.use(route.get('/([0-9]{11,13})', post));
 //debug cache
 app.use(route.get('/cache',cache));
+
+app.use(route.get('/archive',archive));
+app.use(route.get('/inbox',inbox));
+
+function *inbox()
+{ 
+  this.body = yield render('post',
+  {
+    post:{
+      type:'inbox',
+      content:
+      "my inbox is under building."
+    }
+  });
+}
+
+function *archive()
+{ 
+  this.body = yield render('post',
+  {
+    post:{
+      type:'archive',
+      content:
+      "my archive is under building."
+    }
+  });
+}
 
 // function 后面带 * 的叫做generator。
 // 在generator内部你可以使用 yield 
@@ -47,7 +74,12 @@ function *cache(){
   console.log(cached.Article_Title());
   console.log(cached.Year_Month());
   console.log(cached.Year_Month_Article());
-  this.body = yield render('post', {post:{content:'cache info list on your console.'}});
+  this.body = yield render('post', {
+      post:{
+        type:'cache',
+        content:'cache info list on your console.'}
+      }
+  );
 }
 
 /**
@@ -91,65 +123,90 @@ function *post(){
   }
   else
   {
-      this.body = "sorry, we can't find this post.";
+    this.body = yield render('post',
+      {
+        post:{
+          type:'文章',
+          content:
+          "sorry, we can't find this post."
+        }
+      });
   }
 
-  var name = path.parse(post_name).name;
-  var stamp = name.split('#')[0];
-  var date =  name.split('#')[1];
-  var en_title = name.split('#')[2];
-
-  var date_en = parse_date_en(date);
-  var year = date_en.split('-')[0];
-  var month = date_en.split('-')[1];
-  var day = date_en.split('-')[2];
-
-  var sorted_timestamp_array = get_sorted_json_value_array(cached.Article_Timestamp());
-  //console.log(sorted_timestamp_array);
-
-  var current_index = sorted_timestamp_array.indexOf(+stamp);
-  //console.log(stamp);
-
-  var next_url = '/';
-  var next_title = '无';
-  if(current_index + 1 < sorted_timestamp_array.length)
+  if(!post_name)
   {
-    var next_stamp = sorted_timestamp_array[current_index + 1];
-    var next_en_title = cached.Timestamp_Article()[next_stamp];
-    next_title = cached.Article_Title()[next_en_title];
-    next_url = '/' + next_en_title.split('#')[1] + '/' + next_en_title.split('#')[2];
+    this.body = yield render('post',
+      {
+        post:{
+          type:'文章',
+          content:
+          "sorry, we can't find this post."
+        }
+      });
   }
-
-  var last_url = '/';
-  var last_title = '无';
-  if(current_index - 1 >= 0)
+  else
   {
-    var last_stamp = sorted_timestamp_array[current_index - 1];
-    var last_en_title = cached.Timestamp_Article()[last_stamp];
-    last_title = cached.Article_Title()[last_en_title];
-    last_url = '/' + last_en_title.split('#')[1] + '/' + last_en_title.split('#')[2];
-  }
-  var post_json = { post:
+
+    console.log('>>>>>>>>>'+post_name);
+    var name = path.parse(post_name).name;
+    var stamp = name.split('#')[0];
+    var date =  name.split('#')[1];
+    var en_title = name.split('#')[2];
+
+    var date_en = parse_date_en(date);
+    var year = date_en.split('-')[0];
+    var month = date_en.split('-')[1];
+    var day = date_en.split('-')[2];
+
+    var sorted_timestamp_array = get_sorted_json_value_array(cached.Article_Timestamp());
+    //console.log(sorted_timestamp_array);
+
+    var current_index = sorted_timestamp_array.indexOf(+stamp);
+    //console.log(stamp);
+
+    var next_url = '/';
+    var next_title = '无';
+    if(current_index + 1 < sorted_timestamp_array.length)
     {
-      title:cached.Article_Title()[name],
-      url:'/' + date + '/' + en_title,
-      content:post_content,
-      date:{
-        year:year,
-        month:month,
-        day:day
-      },
-      next_url:next_url,
-      next_title:next_title,
-      last_url:last_url,
-      last_title:last_title
+      var next_stamp = sorted_timestamp_array[current_index + 1];
+      var next_en_title = cached.Timestamp_Article()[next_stamp];
+      next_title = cached.Article_Title()[next_en_title];
+      next_url = '/' + next_en_title.split('#')[1] + '/' + next_en_title.split('#')[2];
     }
-  }; 
 
-  post_json['permanent_url'] = 'http://tinygg.cn/' + stamp;
-  post_json['permanent_id'] = stamp;
-  //console.log(post_json);
-  this.body = yield render('post', post_json);
+    var last_url = '/';
+    var last_title = '无';
+    if(current_index - 1 >= 0)
+    {
+      var last_stamp = sorted_timestamp_array[current_index - 1];
+      var last_en_title = cached.Timestamp_Article()[last_stamp];
+      last_title = cached.Article_Title()[last_en_title];
+      last_url = '/' + last_en_title.split('#')[1] + '/' + last_en_title.split('#')[2];
+    }
+    var post_json = { post:
+      {
+        type:'文章',
+        title:cached.Article_Title()[name],
+        url:'/' + date + '/' + en_title,
+        content:post_content,
+        date:{
+          year:year,
+          month:month,
+          day:day
+        },
+        next_url:next_url,
+        next_title:next_title,
+        last_url:last_url,
+        last_title:last_title
+      }
+    }; 
+
+    post_json['permanent_url'] = 'http://tinygg.cn/' + stamp;
+    post_json['permanent_id'] = stamp;
+    //console.log(post_json);
+    this.body = yield render('post', post_json);
+  }
+
 }
 
 function *index() {

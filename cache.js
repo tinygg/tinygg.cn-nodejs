@@ -145,7 +145,7 @@ function add_callback(filepath) {
 
 	//read first line
 	var data=fs.readFileSync(filepath,'utf-8');
-	var lines = data.toString().split(/\r\n*/ig);
+	var lines = data.toString().split(/\r?\n/g);
 	article_title_cache[name] = lines[0].replace(/#\s*/,'');
 	if(logON) console.log(article_title_cache);
 

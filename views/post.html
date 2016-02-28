@@ -1,6 +1,6 @@
 {% extends 'frame.html' %}
 
-{% block title %}文章 - {% endblock %}
+{% block title %}{{ post.type }} - {% endblock %}
 
 {% block content %}
 <div id="content">
@@ -37,7 +37,10 @@
             </div>
         </div>
     </div>
+
+
     <div id="pagination" class="normal-pagination">
+    {% if post.last_url %}
         {% if post.last_url != '/' %}
                 <a href="{{post.last_url}}" id="pager-prev" alt="{{post.last_title}}">上一篇</a>
         {% else %}
@@ -49,10 +52,19 @@
         {% else %}
                 <a href="{{post.next_url}}" id="pager-next" alt="{{post.next_title}}">首页</a>
         {% endif %}
-
+    {% else %}
+                <a href="/" id="pager-prev" alt="返回首页">返回首页</a>
+    {% endif %}
     </div>
+
+
+    {% if permanent_url %}
     <div id="disqus_thread" style='margin: 0 0 20px 192px;width: 742px;'></div>
+    {% endif %}
+
 </div>
+
+{% if permanent_url %}
 <script>
 var disqus_config = function () {
     this.page.url = '{{permanent_url}}';
@@ -66,4 +78,6 @@ s.setAttribute('data-timestamp', +new Date());
 })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+{% endif %}
+
 {% endblock %}
