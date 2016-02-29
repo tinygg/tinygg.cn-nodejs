@@ -12,6 +12,7 @@ var parse = require('co-body');
 var glob = require("glob");
 var rf=require('fs');
 var path = require('path');
+var moment = require('moment');
 
 var cached = require('./cache.js');
 cached.LogON(false);
@@ -42,6 +43,14 @@ app.use(route.get('/cache',cache));
 
 app.use(route.get('/archive',archive));
 app.use(route.get('/inbox',inbox));
+
+//timestamp tools
+app.use(route.get('/timestamp',timestamp));
+
+function *timestamp()
+{
+  this.body = Date.now()+'#'+ moment().format('YYYY-MM-DD')+'#';
+}
 
 function *inbox()
 { 
