@@ -45,11 +45,26 @@ app.use(route.get('/archive',archive));
 app.use(route.get('/inbox',inbox));
 
 //timestamp tools
-app.use(route.get('/timestamp',timestamp));
+app.use(route.get('/timestamp(.*)',timestamp));
 
 function *timestamp()
 {
-  this.body = Date.now()+'#'+ moment().format('YYYY-MM-DD')+'#';
+  var paths = this.request.path.split('/');
+  //console.log(paths);
+  var time;
+  if(paths.length == 3) {
+    //console.log(paths[2]);
+    time = paths[2];    
+  }
+  else 
+  {
+    paths = this.request.querystring;
+    //console.log(paths);
+    time = paths;
+  }
+  //console.log(time);
+  if(time) this.body = moment(time)+'#'+ moment(time).format('YYYY-MM-DD')+'#';
+  else this.body = Date.now()+'#'+ moment().format('YYYY-MM-DD')+'#';
 }
 
 function *inbox()
