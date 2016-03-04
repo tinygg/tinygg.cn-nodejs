@@ -14,7 +14,7 @@ input
 
 body {
     font-size:12px;
-    font-family:"Microsoft Yahei","微软雅黑",Tahoma,Arial,Helvetica,STHeiti;
+    font-family: PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans;
     _font-family:Tahoma,Arial,Helvetica,STHeiti;cursor:default;    
 }
 
@@ -36,6 +36,7 @@ a {
     -o-transition: color .3s ease, background-color .3s ease;
     transition: color .3s ease, background-color .3s ease;
     color:#E53843;
+    text-decoration: none;
 }
 a:hover{
     color:#363D3F;
@@ -185,23 +186,6 @@ body{
     clear:both;
     margin-bottom:30px;
 }
-.rich-content{
-    line-height:24px;
-    word-wrap:break-word;
-}
-.rich-content img{
-    max-width:100%;
-    _width:700px;
-    height:auto;
-}
-.rich-content blockquote{
-    margin:10px 0 10px 10px;
-    border-left:3px solid #DDD;
-    padding-left:10px;
-}
-
-.rich-content ul{padding:0;margin:0;list-style:disc inside !important;} 
-.rich-content ol{list-style:decimal inside !important;}
 
 .post-meta{
     width:166px;
@@ -390,6 +374,35 @@ body{
     margin:0 auto;
     text-align:center;
 }
+/*/////////////////////////////////////////////////*/
+.rich-content{
+    line-height:24px;
+    word-wrap:break-word;
+    font-family: PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans;
+    font-weight: 300;
+    color: #333;
+    font-size: 1em;
+    line-height: 1.8;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: PingFang SC,Verdana,Helvetica Neue,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;
+    font-weight: 100;
+    color: #000;
+    line-height: 1.35;
+}
+.rich-content img{
+    max-width:100%;
+    _width:700px;
+    height:auto;
+}
+.rich-content blockquote{
+    margin:10px 0 10px 10px;
+    border-left:3px solid #DDD;
+    padding-left:10px;
+}
+
+.rich-content ul{padding:0;margin:0;list-style:disc inside !important;} 
+.rich-content ol{list-style:decimal inside !important;}
 
 .rich-content .edui-filter-underline{text-decoration: underline !important;}
 .rich-content .edui-filter-line-through{text-decoration: line-through !important;}
