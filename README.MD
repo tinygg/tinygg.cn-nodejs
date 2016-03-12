@@ -18,16 +18,8 @@ Markdown文章直接发布在archive目录即可.
 ## 部署
 
 ### NODE依赖项
-	npm install koa
-	npm install koa-route
-	npm install koa-static
-	npm install koa-logger
-	npm install swig
-	npm install co-body
-	npm install co-views
-	npm install glob
-	npm install gaze
-	npm install showdown
+	npm install #项目依赖
+	npm install forever -g #持续运行依赖.
 
 ### 反向代理配置(Nginx)
 
