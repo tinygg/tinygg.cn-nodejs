@@ -1,0 +1,33 @@
+{
+  "name": "tinygg.cn",
+  "version": "1.0.0",
+  "description": "tinygg's blog https://tinygg.cn/",
+  "main": "blog.js",
+  "dependencies": {
+    "co-body": "^4.0.0",
+    "co-views": "^2.1.0",
+    "gaze": "^1.0.0",
+    "glob": "^7.0.3",
+    "koa": "^1.1.2",
+    "koa-logger": "1.3.0",
+    "koa-route": "^2.4.2",
+    "koa-static": "^2.0.0",
+    "showdown": "^1.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node blog.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tinygg/tinygg.cn.git"
+  },
+  "keywords": [],
+  "author": "tiny",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tinygg/tinygg.cn/issues"
+  },
+  "homepage": "https://github.com/tinygg/tinygg.cn#readme"
+}
