@@ -2,4 +2,3 @@ node_modules/*
 archive/*.MD
 *.dump
 !*#IT-IS-A-TEST.MD
-*.exe
