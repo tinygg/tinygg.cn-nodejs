@@ -209,7 +209,7 @@ function *post(){
     }
     var post_json = { post:
       {
-        type:'文章',
+        type:cached.Article_Title()[name],//'文章'
         title:cached.Article_Title()[name],
         url:'/' + date + '/' + en_title,
         content:post_content,
